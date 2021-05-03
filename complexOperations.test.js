@@ -202,7 +202,7 @@ describe('complexOperation - Unit Tests', () => {
   })
 })
 
-//////////////////////// Mocked functions//////////////////////////////////////
+//////////////////////// Mocked functions //////////////////////////////////////
 describe('checkEmail function mocked', () => {
   beforeEach(() => {
     jest.restoreAllMocks()
