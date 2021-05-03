@@ -1,4 +1,4 @@
-import 'jest'
+/* import 'jest'
 let isNumber = jest.fn().mockReturnValue(5)
 let isArray = jest.fn().mockReturnValue([3, 7])
 let isString = jest.fn().mockReturnValue('stringg')
@@ -41,3 +41,4 @@ const funmock = jest.mock('./basicOperations', () => {
 })
 
 export default funmock
+ */
