@@ -214,7 +214,7 @@ describe('checkEmail function mocked', () => {
     )
   })
   it("email value hasn't got correct form", () => {
-    jest.spyOn(basicOperations, 'validateEmail').mockReturnValue('email.com')
+    jest.spyOn(basicOperations, 'validateEmail').mockReturnValue(null)
     expect(complexOperations.checkEmail('mock')).toBe('The email is invalid')
   })
   it('email value is valid email', () => {
@@ -278,12 +278,12 @@ describe('sumGreaterThan function mocked', () => {
   })
 })
 
-escribe('intersectionBetweenArrays function mocked', () => {
+describe('intersectionBetweenArrays function mocked', () => {
   beforeEach(() => {
     jest.restoreAllMocks()
   })
   it("testing with other value that's not an array", () => {
-    jest.spyOn(basicOperations, 'isArray').mockReturnValue('im an array')
+    jest.spyOn(basicOperations, 'isArray').mockReturnValue(null)
     expect(complexOperations.intersectionBetweenArrays('mock')).toBe(
       'The params should be arrays'
     )
@@ -301,13 +301,13 @@ escribe('intersectionBetweenArrays function mocked', () => {
     ).toStrictEqual([1, 3, 5])
   })
   it('no matching elements in arrays', () => {
-    jest.spyOn(basicOperations, 'arrayIntersection').mockReturnValue([12])
+    jest.spyOn(basicOperations, 'arrayIntersection').mockReturnValue([])
     expect(
       complexOperations.intersectionBetweenArrays(
         ['Rosario', 'San Lorenzo', 'San Nicolas'],
         ['Peru', 'Bolivia', 'Mexico']
       )
-    ).toBe('There are not matching elements')
+    ).toEqual('There are not matching elements')
   })
 })
 
@@ -316,16 +316,16 @@ describe('sortArrayOfObjectsByKey function mocked', () => {
     jest.restoreAllMocks()
   })
   it('first param is not an array', () => {
-    jest.spyOn(basicOperations, 'isArray').mockReturnValue('aaa')
-    expect(
-      complexOperations.sortArrayOfObjectsByKey([{ name: 'maria' }], 'name')
-    ).toBe('The first param should be an array')
+    jest.spyOn(basicOperations, 'isArray').mockReturnValue(null)
+    expect(complexOperations.sortArrayOfObjectsByKey([], 'name')).toBe(
+      'The first param should be an array'
+    )
   })
   it('second param is not an array', () => {
-    jest.spyOn(basicOperations, 'isString').mockReturnValue([23])
-    expect(
-      complexOperations.sortArrayOfObjectsByKey([{ name: 'maria' }], 'name')
-    ).toBe('The second param should be an string')
+    jest.spyOn(basicOperations, 'isString').mockReturnValue(null)
+    expect(complexOperations.sortArrayOfObjectsByKey([], 'name')).toBe(
+      'The second param should be an string'
+    )
   })
   it('sorting arrays by key', () => {
     jest
@@ -352,14 +352,14 @@ describe('sortArrayOfObjectsByKey function mocked', () => {
   it('Array with incorrect key', () => {
     jest
       .spyOn(basicOperations, 'arrayElementsAreObjectWithKey')
-      .mockReturnValue(null)
+      .mockReturnValue(undefined)
     expect(complexOperations.sortArrayOfObjectsByKey([], 'vaccine')).toBe(
-      'Some elements in the array does not have the instrument property'
+      'Some elements in the array does not have the vaccine property'
     )
   })
   it('nothing to sort', () => {
     jest.spyOn(basicOperations, 'sortArrayByKey').mockReturnValue(0)
-    expect(complexOperations.sortArrayOfObjectsByKey(['A'], 'noname')).toBe(0)
+    expect(complexOperations.sortArrayOfObjectsByKey([], 'noname')).toBe(0)
   })
 })
 
@@ -368,33 +368,33 @@ describe('numberOfOddAndEvenNumbers function mocked', () => {
     jest.restoreAllMocks()
   })
   it('param is not an array', () => {
-    jest.spyOn(basicOperations, 'isArray').mockReturnValue('FFF')
-    expect(complexOperations.numberOfOddAndEvenNumbers([2])).toBe(
+    jest.spyOn(basicOperations, 'isArray').mockReturnValue(false)
+    expect(complexOperations.numberOfOddAndEvenNumbers([])).toBe(
       'The param should be an array'
     )
   })
   it(' param of array is not a number', () => {
-    jest.spyOn(basicOperations, 'isNumber').mockReturnValue('number')
+    jest.spyOn(basicOperations, 'isNumber').mockReturnValue(false)
     expect(complexOperations.numberOfOddAndEvenNumbers([2, 3])).toBe(
       'The array should have only numbers'
     )
   })
-  it('four odds number in the array', () => {
+  it('two odds number in the array', () => {
     jest
       .spyOn(basicOperations, 'getOddNumbersFromArray')
-      .mockReturnValue([7, 11, 31, 157])
-    expect(complexOperations.numberOfOddAndEvenNumbers([2, 4])).toEqual({
-      odd: 4,
+      .mockReturnValue([31, 157])
+    expect(complexOperations.numberOfOddAndEvenNumbers([])).toEqual({
+      odd: 2,
       even: 0
     })
   })
-  it('four even number in the array', () => {
+  it('two even number in the array', () => {
     jest
-      .spyOn(basicOperations, 'getOddNumbersFromArray')
-      .mockReturnValue([10, 4, 6, 8])
-    expect(complexOperations.numberOfOddAndEvenNumbers([2, 4])).toEqual({
+      .spyOn(basicOperations, 'getEvenNumbersFromArray')
+      .mockReturnValue([10, 4])
+    expect(complexOperations.numberOfOddAndEvenNumbers([])).toEqual({
       odd: 0,
-      even: 4
+      even: 2
     })
   })
 })
